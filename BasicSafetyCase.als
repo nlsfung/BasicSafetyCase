@@ -10,31 +10,22 @@ fact ElementOwnership {
 	SafetyCase.solutions = Solution
 }
 
-sig Goal extends SafetyCaseElement {}
+sig Goal extends SafetyCaseElement {
+	supportedBy: some (Goal + Solution)
+}
 sig Solution extends SafetyCaseElement {}
 
-sig Supportable in SafetyCaseElement {
-	supportedBy: some Supporter
-}
-fact SupportableElements {
-	Supportable = Goal
-}
 fact SingleRoot {
-	#(Supporter - Supporter.supportedBy) = 1
+	#(Goal + Solution - Goal.supportedBy) = 1
 }
 fact AcyclicSupporters {
 	#(^supportedBy & iden) = 0
 }
 
-sig Supporter in SafetyCaseElement {}
-fact SupporterElements {
-	Supporter = Goal + Solution
-}
-
 abstract sig SafetyCaseElement {}
 
-fun getDescendants(s: Supportable): set Supporter {
-	s.^supportedBy
+fun getDescendants(g: Goal): set (Goal + Solution) {
+	g.^supportedBy
 }
 
 pred isTree() {
@@ -45,5 +36,13 @@ pred deleteGoal(g:Goal, gSet': set Goal, sSet': set supportedBy) {
 	gSet' = Goal - g and sSet' = supportedBy - (g <: supportedBy) - (supportedBy :> g)
 }
 
-pred show() {}
-run deleteGoal for 10 but exactly 5 Goal, exactly 5 Solution
+assert GoalRoot {
+	Solution in Goal.supportedBy
+}
+
+check GoalRoot
+
+-- run isTree for 10 but exactly 5 Goal
+
+--pred show() {}
+--run show for 10 but exactly 5 Goal, exactly 5 Solution
