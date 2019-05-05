@@ -28,6 +28,10 @@ fun getDescendants(g: Goal): set (Goal + Solution) {
 	g.^supportedBy
 }
 
+fun getAncestors(e: SafetyCaseElement): set (Goal + Solution) {
+	^supportedBy.e
+}
+
 pred isTree() {
 	#supportedBy = minus[#SafetyCaseElement, 1]
 }
@@ -44,5 +48,5 @@ check GoalRoot
 
 -- run isTree for 10 but exactly 5 Goal
 
---pred show() {}
---run show for 10 but exactly 5 Goal, exactly 5 Solution
+-- pred show() {}
+-- run show for 10 but exactly 5 Goal, exactly 5 Solution
