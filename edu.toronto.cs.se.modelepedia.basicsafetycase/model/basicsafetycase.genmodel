@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/edu.toronto.cs.se.modelepedia.basicsafetycase/src-gen"
+    creationIcons="false" editDirectory="/edu.toronto.cs.se.modelepedia.basicsafetycase.edit/src-gen"
+    editorDirectory="/edu.toronto.cs.se.modelepedia.basicsafetycase.editor/src-gen"
+    modelPluginID="edu.toronto.cs.se.modelepedia.basicsafetycase" modelName="BasicSafetyCase"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    importOrganizing="true">
+  <foreignModel>basicsafetycase.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="BasicSafetyCase" basePackage="edu.toronto.cs.se.modelepedia"
+      disposableProviderFactory="true" ecorePackage="basicsafetycase.ecore#/">
+    <genClasses ecoreClass="basicsafetycase.ecore#//SafetyCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference basicsafetycase.ecore#//SafetyCase/goals"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference basicsafetycase.ecore#//SafetyCase/solutions"/>
+      <genOperations ecoreOperation="basicsafetycase.ecore#//SafetyCase/addGoal">
+        <genParameters ecoreParameter="basicsafetycase.ecore#//SafetyCase/addGoal/g"/>
+      </genOperations>
+      <genOperations ecoreOperation="basicsafetycase.ecore#//SafetyCase/deleteGoal">
+        <genParameters ecoreParameter="basicsafetycase.ecore#//SafetyCase/deleteGoal/g"/>
+      </genOperations>
+      <genOperations ecoreOperation="basicsafetycase.ecore#//SafetyCase/addSolution">
+        <genParameters ecoreParameter="basicsafetycase.ecore#//SafetyCase/addSolution/s"/>
+      </genOperations>
+      <genOperations ecoreOperation="basicsafetycase.ecore#//SafetyCase/deleteSolution">
+        <genParameters ecoreParameter="basicsafetycase.ecore#//SafetyCase/deleteSolution/s"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="basicsafetycase.ecore#//Goal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute basicsafetycase.ecore#//Goal/count"/>
+    </genClasses>
+    <genClasses ecoreClass="basicsafetycase.ecore#//Solution">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute basicsafetycase.ecore#//Solution/count"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="basicsafetycase.ecore#//SafetyCaseElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute basicsafetycase.ecore#//SafetyCaseElement/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute basicsafetycase.ecore#//SafetyCaseElement/description"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="basicsafetycase.ecore#//Supportable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference basicsafetycase.ecore#//Supportable/supportedBy"/>
+      <genOperations ecoreOperation="basicsafetycase.ecore#//Supportable/getDescendants"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="basicsafetycase.ecore#//Supporter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference basicsafetycase.ecore#//Supporter/supports"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
