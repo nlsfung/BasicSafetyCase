@@ -1,0 +1,81 @@
+module BasicSafetyCase
+
+definitions 
+
+types 
+	SafetyCase :: 
+		goals: set of Goal
+		solutions: set of Solution
+		supportedBy: map Supportable to set of Supporter
+	inv sc == card getRoots(sc) = 1 and dom sc.supportedBy subset sc.goals and dunion rng sc.supportedBy subset sc.goals union sc.solutions and forall g in set sc.goals & g not in set getDescendants(g, sc);
+		
+	Goal = SafetyCaseElement;
+	Solution = SafetyCaseElement;
+	SafetyCaseElement = token;
+	
+	Supporter = Solution | Goal;	
+	Supportable = Goal;
+
+functions 
+	getRoots: SafetyCase -> set of Goal
+	getRoots(sc) == {elem | elem in set sc.goals & elem not in set dunion rng sc.supportedBy};
+	
+	getDescendants: Supporter * SafetyCase -> set of Supporter
+	getDescendants(elem, sc) == 
+		if elem in set dom sc.supportedBy
+		then getDescendantsRecursive(sc.supportedBy(elem), sc)
+		else {};
+	
+	getDescendantsRecursive: set of Supporter * SafetyCase -> set of Supporter
+	getDescendantsRecursive(initialSet, sc) == 
+		let nextSet: set of Supporter = initialSet union (dunion {sc.supportedBy(elem) | elem in set initialSet & elem in set dom sc.supportedBy})
+		in  if nextSet = initialSet 
+		    then nextSet
+		    else getDescendantsRecursive(nextSet, sc)
+	measure card ((sc.goals union sc.solutions) \ initialSet);
+	
+	isTree: SafetyCase -> bool
+	isTree(sc) == is not yet specified;
+
+values 	
+	BASIC_GOAL: Goal = mk_token(['G', 0]);
+	BASIC_SOLUTION: Solution = mk_token(['S', 0]);
+	BASIC_SUPPORTED_BY: map Goal to set of Solution = {BASIC_GOAL |-> {BASIC_SOLUTION}};
+	BASIC_SAFETY_CASE: SafetyCase = mk_SafetyCase({BASIC_GOAL}, {BASIC_SOLUTION}, BASIC_SUPPORTED_BY);
+	
+	EXTRA_GOAL: Goal = mk_token(['G', 1]);
+	EXTRA_SOLUTION: Solution = mk_token(['S',1]);
+	EXTRA_SUPPORTED_BY: map Goal to set of Solution = {BASIC_GOAL |-> {EXTRA_GOAL}, EXTRA_GOAL |-> {EXTRA_SOLUTION}};
+
+state SingleSafetyCase of
+	sc: SafetyCase
+	init ssc == ssc = mk_SingleSafetyCase(BASIC_SAFETY_CASE)
+end 
+
+operations 
+	reset: () ==> ()
+	reset() == sc := BASIC_SAFETY_CASE;
+	
+	add: set of Goal * set of Solution * map Goal to set of Solution ==> ()
+	add(gSet, sSet, rel) == 
+		let goals: set of Goal = sc.goals union gSet,
+				solutions: set of Solution = sc.solutions union sSet,
+				supportedBy: map Goal to set of Solution = 
+					{g |-> rel(g) | g in set dom rel \ dom sc.supportedBy} munion 
+					{g |-> sc.supportedBy(g) | g in set dom sc.supportedBy \ dom rel} munion
+					{g |-> sc.supportedBy(g) union rel(g) | g in set dom sc.supportedBy inter dom rel}
+		in sc := mk_SafetyCase(goals, solutions, supportedBy);
+		
+	remove: set of Goal * set of Solution * map Goal to set of Solution ==> ()
+	remove(gSet, sSet, rel) == is not yet specified
+	pre gSet subset sc.goals and sSet subset sc.solutions and forall g in set dom rel & g in set dom sc.supportedBy and rel(g) subset sc.supportedBy(g)
+	post (not gSet subset sc.goals) and (not sSet subset sc.solutions) and forall g in set dom rel & (not g in set dom sc.supportedBy) or (rel(g) inter sc.supportedBy(g) = {});
+
+traces
+	AddToSafetyCase : 
+		let goals in set power {mk_token(['G', i]) | i in set {1,2}} in
+		let solutions in set power {mk_token(['S', j]) | j in set {1,2}} in 
+		let supportedBy in set {{g |-> sSet | g in set goals} | sSet in set power solutions} in
+			add(goals, solutions, supportedBy munion {BASIC_GOAL |-> {g | g in set dom supportedBy}});
+
+end BasicSafetyCase
