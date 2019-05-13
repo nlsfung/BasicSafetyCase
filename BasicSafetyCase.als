@@ -28,8 +28,12 @@ fun getDescendants(g: Goal): set (Goal + Solution) {
 	g.^supportedBy
 }
 
-fun getAncestors(e: SafetyCaseElement): set (Goal + Solution) {
-	^supportedBy.e
+fun getNumAncestors(e: SafetyCaseElement): Int {
+	#(^supportedBy.e)
+}
+
+pred isRoot(e: SafetyCaseElement) {
+	getNumAncestors[e] = 0
 }
 
 pred isTree() {
