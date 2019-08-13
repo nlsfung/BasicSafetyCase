@@ -7,6 +7,7 @@ import edu.toronto.cs.se.modelepedia.basicsafetycase.Goal;
 import edu.toronto.cs.se.modelepedia.basicsafetycase.Supportable;
 import edu.toronto.cs.se.modelepedia.basicsafetycase.Supporter;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 import java.util.Collection;
 
@@ -14,7 +15,9 @@ import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -108,6 +111,31 @@ public class GoalImpl extends SupportableImpl implements Goal {
 	@Override
 	public void setCount(BigInteger newCount) {
 		COUNT__ESETTING_DELEGATE.dynamicSet(this, null, 0, newCount);
+	}
+
+	/**
+	 * The cached invocation delegate for the '{@link #getNumAncestors() <em>Get Num Ancestors</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNumAncestors()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final EOperation.Internal.InvocationDelegate GET_NUM_ANCESTORS__EINVOCATION_DELEGATE = ((EOperation.Internal) BasicSafetyCasePackage.Literals.SUPPORTER
+			.getEOperations().get(0)).getInvocationDelegate();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BigInteger getNumAncestors() {
+		try {
+			return (BigInteger) GET_NUM_ANCESTORS__EINVOCATION_DELEGATE.dynamicInvoke(this, null);
+		} catch (InvocationTargetException ite) {
+			throw new WrappedException(ite);
+		}
 	}
 
 	/**

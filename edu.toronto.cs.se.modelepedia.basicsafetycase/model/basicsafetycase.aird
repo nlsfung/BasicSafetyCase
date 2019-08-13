@@ -5,6 +5,7 @@
     <semanticResources>basicsafetycase.genmodel</semanticResources>
     <semanticResources>../build.properties</semanticResources>
     <semanticResources>../plugin.properties</semanticResources>
+    <semanticResources>basicsafetycase.ocl</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_KfCS0FxyEemRbOBkUPGFHg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Kn1pg1xyEemRbOBkUPGFHg" name="basicsafetycase" repPath="#_KniukFxyEemRbOBkUPGFHg">

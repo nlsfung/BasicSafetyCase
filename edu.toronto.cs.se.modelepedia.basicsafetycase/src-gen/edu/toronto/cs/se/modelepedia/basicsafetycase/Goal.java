@@ -29,7 +29,8 @@ public interface Goal extends Supportable, Supporter {
 	 * @return the value of the '<em>Count</em>' attribute.
 	 * @see #setCount(BigInteger)
 	 * @see edu.toronto.cs.se.modelepedia.basicsafetycase.BasicSafetyCasePackage#getGoal_Count()
-	 * @model annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot derivation='self.oclType().allInstances() -&gt; size()'"
+	 * @model derived="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot derivation='Goal.allInstances() -&gt; size()'"
 	 * @generated
 	 */
 	BigInteger getCount();

@@ -2,6 +2,7 @@
  */
 package edu.toronto.cs.se.modelepedia.basicsafetycase;
 
+import java.math.BigInteger;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -34,5 +35,14 @@ public interface Supporter extends SafetyCaseElement {
 	 * @generated
 	 */
 	EList<Supportable> getSupports();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='self.supports -&gt; closure(s | if s.oclIsKindOf(Supporter) then s.oclAsType(Supporter).supports else s.oclAsSet() endif) -&gt; size()'"
+	 * @generated
+	 */
+	BigInteger getNumAncestors();
 
 } // Supporter

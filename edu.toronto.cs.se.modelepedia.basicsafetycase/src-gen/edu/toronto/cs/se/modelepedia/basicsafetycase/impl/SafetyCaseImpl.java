@@ -106,32 +106,6 @@ public class SafetyCaseImpl extends MinimalEObjectImpl.Container implements Safe
 	}
 
 	/**
-	 * The cached invocation delegate for the '{@link #addGoal(edu.toronto.cs.se.modelepedia.basicsafetycase.Goal) <em>Add Goal</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #addGoal(edu.toronto.cs.se.modelepedia.basicsafetycase.Goal)
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EOperation.Internal.InvocationDelegate ADD_GOAL_GOAL__EINVOCATION_DELEGATE = ((EOperation.Internal) BasicSafetyCasePackage.Literals.SAFETY_CASE
-			.getEOperations().get(0)).getInvocationDelegate();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void addGoal(Goal g) {
-		try {
-			ADD_GOAL_GOAL__EINVOCATION_DELEGATE.dynamicInvoke(this,
-					new BasicEList.UnmodifiableEList<Object>(1, new Object[] { g }));
-		} catch (InvocationTargetException ite) {
-			throw new WrappedException(ite);
-		}
-	}
-
-	/**
 	 * The cached invocation delegate for the '{@link #deleteGoal(edu.toronto.cs.se.modelepedia.basicsafetycase.Goal) <em>Delete Goal</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -140,7 +114,7 @@ public class SafetyCaseImpl extends MinimalEObjectImpl.Container implements Safe
 	 * @ordered
 	 */
 	protected static final EOperation.Internal.InvocationDelegate DELETE_GOAL_GOAL__EINVOCATION_DELEGATE = ((EOperation.Internal) BasicSafetyCasePackage.Literals.SAFETY_CASE
-			.getEOperations().get(1)).getInvocationDelegate();
+			.getEOperations().get(0)).getInvocationDelegate();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,58 +126,6 @@ public class SafetyCaseImpl extends MinimalEObjectImpl.Container implements Safe
 		try {
 			DELETE_GOAL_GOAL__EINVOCATION_DELEGATE.dynamicInvoke(this,
 					new BasicEList.UnmodifiableEList<Object>(1, new Object[] { g }));
-		} catch (InvocationTargetException ite) {
-			throw new WrappedException(ite);
-		}
-	}
-
-	/**
-	 * The cached invocation delegate for the '{@link #addSolution(edu.toronto.cs.se.modelepedia.basicsafetycase.Solution) <em>Add Solution</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #addSolution(edu.toronto.cs.se.modelepedia.basicsafetycase.Solution)
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EOperation.Internal.InvocationDelegate ADD_SOLUTION_SOLUTION__EINVOCATION_DELEGATE = ((EOperation.Internal) BasicSafetyCasePackage.Literals.SAFETY_CASE
-			.getEOperations().get(2)).getInvocationDelegate();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void addSolution(Solution s) {
-		try {
-			ADD_SOLUTION_SOLUTION__EINVOCATION_DELEGATE.dynamicInvoke(this,
-					new BasicEList.UnmodifiableEList<Object>(1, new Object[] { s }));
-		} catch (InvocationTargetException ite) {
-			throw new WrappedException(ite);
-		}
-	}
-
-	/**
-	 * The cached invocation delegate for the '{@link #deleteSolution(edu.toronto.cs.se.modelepedia.basicsafetycase.Solution) <em>Delete Solution</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #deleteSolution(edu.toronto.cs.se.modelepedia.basicsafetycase.Solution)
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EOperation.Internal.InvocationDelegate DELETE_SOLUTION_SOLUTION__EINVOCATION_DELEGATE = ((EOperation.Internal) BasicSafetyCasePackage.Literals.SAFETY_CASE
-			.getEOperations().get(3)).getInvocationDelegate();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void deleteSolution(Solution s) {
-		try {
-			DELETE_SOLUTION_SOLUTION__EINVOCATION_DELEGATE.dynamicInvoke(this,
-					new BasicEList.UnmodifiableEList<Object>(1, new Object[] { s }));
 		} catch (InvocationTargetException ite) {
 			throw new WrappedException(ite);
 		}

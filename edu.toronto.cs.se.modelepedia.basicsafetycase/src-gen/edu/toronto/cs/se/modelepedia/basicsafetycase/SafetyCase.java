@@ -52,33 +52,9 @@ public interface SafetyCase extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot post='self.goals -&gt; includes(g)'"
-	 * @generated
-	 */
-	void addGoal(Goal g);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot pre='self.goals -&gt; includes(g)' post='self.goals -&gt; excludes(g)'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot pre='self.goals -&gt; includes(g)' post='self.goals -&gt; excludes(g) and self.goals.supportedBy -&gt; excludes(g)'"
 	 * @generated
 	 */
 	void deleteGoal(Goal g);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot post='self.solutions -&gt; includes(s)'"
-	 * @generated
-	 */
-	void addSolution(Solution s);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot pre='self.solutions -&gt; includes(s)' post='self.solutions -&gt; excludes(s)'"
-	 * @generated
-	 */
-	void deleteSolution(Solution s);
 
 } // SafetyCase

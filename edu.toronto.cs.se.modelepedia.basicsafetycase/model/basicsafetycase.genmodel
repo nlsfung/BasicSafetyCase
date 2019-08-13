@@ -15,17 +15,8 @@
     <genClasses ecoreClass="basicsafetycase.ecore#//SafetyCase">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference basicsafetycase.ecore#//SafetyCase/goals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference basicsafetycase.ecore#//SafetyCase/solutions"/>
-      <genOperations ecoreOperation="basicsafetycase.ecore#//SafetyCase/addGoal">
-        <genParameters ecoreParameter="basicsafetycase.ecore#//SafetyCase/addGoal/g"/>
-      </genOperations>
       <genOperations ecoreOperation="basicsafetycase.ecore#//SafetyCase/deleteGoal">
         <genParameters ecoreParameter="basicsafetycase.ecore#//SafetyCase/deleteGoal/g"/>
-      </genOperations>
-      <genOperations ecoreOperation="basicsafetycase.ecore#//SafetyCase/addSolution">
-        <genParameters ecoreParameter="basicsafetycase.ecore#//SafetyCase/addSolution/s"/>
-      </genOperations>
-      <genOperations ecoreOperation="basicsafetycase.ecore#//SafetyCase/deleteSolution">
-        <genParameters ecoreParameter="basicsafetycase.ecore#//SafetyCase/deleteSolution/s"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="basicsafetycase.ecore#//Goal">
@@ -44,6 +35,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="basicsafetycase.ecore#//Supporter">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference basicsafetycase.ecore#//Supporter/supports"/>
+      <genOperations ecoreOperation="basicsafetycase.ecore#//Supporter/getNumAncestors"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

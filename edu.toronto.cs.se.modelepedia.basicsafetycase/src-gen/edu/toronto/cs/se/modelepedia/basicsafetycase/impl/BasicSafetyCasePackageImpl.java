@@ -379,26 +379,17 @@ public class BasicSafetyCasePackageImpl extends EPackageImpl implements BasicSaf
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(safetyCaseEClass, null, "addGoal", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(safetyCaseEClass, null, "deleteGoal", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getGoal(), "g", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(safetyCaseEClass, null, "deleteGoal", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getGoal(), "g", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(safetyCaseEClass, null, "addSolution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getSolution(), "s", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(safetyCaseEClass, null, "deleteSolution", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getSolution(), "s", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(goalEClass, Goal.class, "Goal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGoal_Count(), ecorePackage.getEBigInteger(), "count", null, 0, 1, Goal.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(solutionEClass, Solution.class, "Solution", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSolution_Count(), ecorePackage.getEBigInteger(), "count", null, 0, 1, Solution.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(safetyCaseElementEClass, SafetyCaseElement.class, "SafetyCaseElement", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -421,6 +412,8 @@ public class BasicSafetyCasePackageImpl extends EPackageImpl implements BasicSaf
 		initEReference(getSupporter_Supports(), this.getSupportable(), this.getSupportable_SupportedBy(), "supports",
 				null, 0, -1, Supporter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(supporterEClass, ecorePackage.getEBigInteger(), "getNumAncestors", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -472,23 +465,18 @@ public class BasicSafetyCasePackageImpl extends EPackageImpl implements BasicSaf
 		addAnnotation(safetyCaseEClass, source, new String[] { "SingleRoot",
 				"self.goals -> union(self.solutions) -> select(elem | elem.supports -> size() = 0) -> size() = 1" });
 		addAnnotation(safetyCaseEClass.getEOperations().get(0), source,
-				new String[] { "post", "self.goals -> includes(g)" });
-		addAnnotation(safetyCaseEClass.getEOperations().get(1), source,
-				new String[] { "pre", "self.goals -> includes(g)", "post", "self.goals -> excludes(g)" });
-		addAnnotation(safetyCaseEClass.getEOperations().get(2), source,
-				new String[] { "post", "self.solutions -> includes(s)" });
-		addAnnotation(safetyCaseEClass.getEOperations().get(3), source,
-				new String[] { "pre", "self.solutions -> includes(s)", "post", "self.solutions -> excludes(s)" });
-		addAnnotation(getGoal_Count(), source,
-				new String[] { "derivation", "self.oclType().allInstances() -> size()" });
-		addAnnotation(getSolution_Count(), source,
-				new String[] { "derivation", "self.oclType().allInstances() -> size()" });
+				new String[] { "pre", "self.goals -> includes(g)", "post",
+						"self.goals -> excludes(g) and self.goals.supportedBy -> excludes(g)" });
+		addAnnotation(getGoal_Count(), source, new String[] { "derivation", "Goal.allInstances() -> size()" });
+		addAnnotation(getSolution_Count(), source, new String[] { "derivation", "Solution.allInstances() -> size()" });
 		addAnnotation(getSafetyCaseElement_Id(), source, new String[] { "derivation",
 				"if self.oclIsTypeOf(Goal) then \'G\'.concat(self.oclAsType(Goal).count.toString()) else \'Sn\'.concat(self.oclAsType(Solution).count.toString()) endif" });
 		addAnnotation(supportableEClass, source,
 				new String[] { "AcyclicSupporters", "self.getDescendants() -> excludes(self)" });
 		addAnnotation(supportableEClass.getEOperations().get(0), source, new String[] { "body",
 				"self.supportedBy -> closure(s | if s.oclIsKindOf(Supportable) then s.oclAsType(Supportable).supportedBy else s.oclAsSet() endif)" });
+		addAnnotation(supporterEClass.getEOperations().get(0), source, new String[] { "body",
+				"self.supports -> closure(s | if s.oclIsKindOf(Supporter) then s.oclAsType(Supporter).supports else s.oclAsSet() endif) -> size()" });
 	}
 
 } //BasicSafetyCasePackageImpl

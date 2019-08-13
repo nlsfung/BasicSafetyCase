@@ -16,46 +16,29 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="SingleRoot" value="self.goals -> union(self.solutions) -> select(elem | elem.supports -> size() = 0) -> size() = 1"/>
     </eAnnotations>
-    <eOperations name="addGoal">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="post" value="self.goals -> includes(g)"/>
-      </eAnnotations>
-      <eParameters name="g" eType="#//Goal"/>
-    </eOperations>
     <eOperations name="deleteGoal">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="pre" value="self.goals -> includes(g)"/>
-        <details key="post" value="self.goals -> excludes(g)"/>
+        <details key="post" value="self.goals -> excludes(g) and self.goals.supportedBy -> excludes(g)"/>
       </eAnnotations>
       <eParameters name="g" eType="#//Goal"/>
-    </eOperations>
-    <eOperations name="addSolution">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="post" value="self.solutions -> includes(s)"/>
-      </eAnnotations>
-      <eParameters name="s" eType="#//Solution"/>
-    </eOperations>
-    <eOperations name="deleteSolution">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="pre" value="self.solutions -> includes(s)"/>
-        <details key="post" value="self.solutions -> excludes(s)"/>
-      </eAnnotations>
-      <eParameters name="s" eType="#//Solution"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1" eType="#//Goal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="solutions" upperBound="-1" eType="#//Solution" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="#//Supportable #//Supporter">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
+        derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="self.oclType().allInstances() -> size()"/>
+        <details key="derivation" value="Goal.allInstances() -> size()"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Solution" eSuperTypes="#//Supporter">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
+        derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="self.oclType().allInstances() -> size()"/>
+        <details key="derivation" value="Solution.allInstances() -> size()"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -82,6 +65,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="supportedBy" lowerBound="1" upperBound="-1" eType="#//Supporter" eOpposite="#//Supporter/supports"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Supporter" abstract="true" eSuperTypes="#//SafetyCaseElement">
+    <eOperations name="getNumAncestors" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.supports -> closure(s | if s.oclIsKindOf(Supporter) then s.oclAsType(Supporter).supports else s.oclAsSet() endif) -> size()"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="supports" upperBound="-1" eType="#//Supportable" eOpposite="#//Supportable/supportedBy"/>
   </eClassifiers>
 </ecore:EPackage>
