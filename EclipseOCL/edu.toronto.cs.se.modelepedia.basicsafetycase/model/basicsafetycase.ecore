@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    name="basicsafetycase" nsURI="http://se.cs.toronto.edu/modelepedia/BasicSafetyCase" nsPrefix="basicsafetycase">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="basicsafetycase" nsURI="http://se.cs.toronto.edu/modelepedia/BasicSafetyCase"
+    nsPrefix="basicsafetycase">
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
   </eAnnotations>
@@ -23,8 +24,10 @@
       </eAnnotations>
       <eParameters name="g" eType="#//Goal"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1" eType="#//Goal" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="solutions" upperBound="-1" eType="#//Solution" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
+        eType="#//Goal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="solutions" upperBound="-1"
+        eType="#//Solution" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="#//Supportable #//Supporter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
@@ -62,7 +65,8 @@
         <details key="body" value="self.supportedBy -> closure(s | if s.oclIsKindOf(Supportable) then s.oclAsType(Supportable).supportedBy else s.oclAsSet() endif)"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="supportedBy" lowerBound="1" upperBound="-1" eType="#//Supporter" eOpposite="#//Supporter/supports"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supportedBy" lowerBound="1"
+        upperBound="-1" eType="#//Supporter" eOpposite="#//Supporter/supports"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Supporter" abstract="true" eSuperTypes="#//SafetyCaseElement">
     <eOperations name="getNumAncestors" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
@@ -70,6 +74,7 @@
         <details key="body" value="self.supports -> closure(s | if s.oclIsKindOf(Supporter) then s.oclAsType(Supporter).supports else s.oclAsSet() endif) -> size()"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="supports" upperBound="-1" eType="#//Supportable" eOpposite="#//Supportable/supportedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supports" upperBound="-1"
+        eType="#//Supportable" eOpposite="#//Supportable/supportedBy"/>
   </eClassifiers>
 </ecore:EPackage>
